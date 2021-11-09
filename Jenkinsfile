@@ -41,14 +41,21 @@ pipeline {
     
             }
         }
-        
-        stage('docker push'){
-            
+       
+        stage('dockerhub push'){            
             steps{
                 withCredentials([string(credentialsId: 'Docker-Hub', variable: 'dockerhubpwd')]) { 
                     sh "docker login -u fairoz -p ${dockerhubpwd}"
+                                
+                  }
                     sh "docker push fairoz/fairozapp:${DOCKER_TAG}"
                 }
+        
+            }
+        stage('docker deploy')
+            steps{
+                
+                ansiblePlaybook credentialsId: 'dev-server', disableHostKeyChecking: true, extras: "-e DOCKER_TAG="${DOCKER_TAG}", installation: 'ansible', inventory: 'dev.inv', playbook: 'deploy-docker.yml
             }
         }        
     }
