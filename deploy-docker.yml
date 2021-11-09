@@ -22,7 +22,7 @@
     - name: start the container
       docker_container:
         name: fairozapp
-        image: "fairoz/fairozapp:${DOCKER_TAG}"
+        image: "fairoz/fairozapp:${{DOCKER_TAG}}"
         state: started
         published_ports:
           - 0.0.0.0:8080:8080
