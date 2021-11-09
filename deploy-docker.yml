@@ -20,7 +20,7 @@
         name: docker-py
         state: present
     - name: start the container
-      docker-container:
+      docker_container:
         name: fairozapp
         image: "fairoz/fairozapp:${DOCKER_TAG}"
         state: started
