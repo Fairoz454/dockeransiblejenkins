@@ -52,13 +52,15 @@ pipeline {
                     sh "docker push fairoz/fairozapp:${DOCKER_TAG}"
             }        
         }
-        stage('docker deploy')
+        
+        stage('docker deploy'){
             steps{
                 
                 ansiblePlaybook credentialsId: 'dev-server', disableHostKeyChecking: true, extras: "-e DOCKER_TAG=${DOCKER_TAG}", installation: 'ansible', inventory: 'dev.inv', playbook: 'deploy-docker.yml'
             }
         }        
     }
+}
 
 def getversion(){
 def commitHash = sh label: '', returnStdout: true, script: 'git rev-parse --short HEAD'
