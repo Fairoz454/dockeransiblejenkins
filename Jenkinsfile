@@ -44,7 +44,7 @@ pipeline {
        
         stage('dockerhub push'){            
             steps{
-                withCredentials([string(credentialsId: 'docker', variable: 'dockerhub')]) {
+                withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
                 sh "docker login -u fairoz -p ${dockerhub}"
                               
                   }
