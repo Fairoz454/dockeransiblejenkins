@@ -8,7 +8,7 @@
         state: present
     - name: install docker
       yum: 
-        name: docker-py
+        name: docker
         state: present
     - name: start docker
       service:
